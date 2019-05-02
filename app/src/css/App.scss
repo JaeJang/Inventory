@@ -1,4 +1,95 @@
 @import "https://fonts.googleapis.com/css?family=Open+Sans:300,400,800";
 @import "reset";
-@import "variable";
+@import "variables";
 @import "font";
+
+body {
+    font-family:'Open Sans', sans-serif;
+}
+
+.sidebar{
+    background: $gray;
+    color: $white;
+    margin:0;
+    padding:0;
+    position: fixed;
+    height: 100%;
+    width: 300px;
+    overflow: auto;
+
+    @media (max-width: $screen-md){
+        width:100%;
+        height:auto;
+        position: relative;
+        padding-bottom: 20px;
+    } 
+    .sidebar-title {
+        padding-top: 50px;
+        text-align: center;
+        h1{
+            font-size: 30px;
+            font-weight: 600;
+        }
+        .sidebar-title-border{
+            width:80%;
+            height:10px;
+            display:inline-block;
+            border-bottom: 2px solid $white;
+            /* padding: 0 20px 0 20px; */
+        }
+    }
+
+    .sidebar-contents{
+        margin-top: 20px;
+        margin-left:30px;
+        text-align: left;
+        @media (max-width: $screen-md){
+            margin-left: 0;
+            text-align: center;
+        }
+
+        .sidebar-category{
+            margin-top: 15px;    
+        }
+    }
+
+}
+
+.contents{
+    margin-left: 300px;
+    padding: 100px 0 0 50px;
+    max-width: 800px;
+    @media (max-width: $screen-md){
+        margin-left: 0;
+        padding:10px;
+    }
+    .contents-title{
+        font-size: 30px;
+        font-weight: 500;
+        /* .contents-title-cates{
+            font-weight: 500px;
+        } */
+        margin-bottom: 40px;
+        @media (max-width:$screen-md){
+            margin-top:20px;
+            margin-left: 10px;
+        }
+        .cate{
+            font-weight: 600;
+        }
+    }
+
+    table{
+        width: 80%;
+        text-align: center;
+        th, td{
+            padding:20px;
+        }
+        tr:not(:first-child):hover {background-color: #ddd;}
+        .label{
+            margin-bottom: 20px;
+            border-bottom: 1px solid $black;
+            
+        }
+    }
+}

@@ -1,0 +1,152 @@
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,400,800";
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Color */
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+.sidebar {
+  background: #242D32;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  height: 100%;
+  width: 300px;
+  overflow: auto;
+}
+@media (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding-bottom: 20px;
+  }
+}
+.sidebar .sidebar-title {
+  padding-top: 50px;
+  text-align: center;
+}
+.sidebar .sidebar-title h1 {
+  font-size: 30px;
+  font-weight: 600;
+}
+.sidebar .sidebar-title .sidebar-title-border {
+  width: 80%;
+  height: 10px;
+  display: inline-block;
+  border-bottom: 2px solid #ffffff;
+  /* padding: 0 20px 0 20px; */
+}
+.sidebar .sidebar-contents {
+  margin-top: 20px;
+  margin-left: 30px;
+  text-align: left;
+}
+@media (max-width: 700px) {
+  .sidebar .sidebar-contents {
+    margin-left: 0;
+    text-align: center;
+  }
+}
+.sidebar .sidebar-contents .sidebar-category {
+  margin-top: 15px;
+}
+
+.contents {
+  margin-left: 300px;
+  padding: 100px 0 0 50px;
+  max-width: 800px;
+}
+@media (max-width: 700px) {
+  .contents {
+    margin-left: 0;
+    padding: 10px;
+  }
+}
+.contents .contents-title {
+  font-size: 30px;
+  font-weight: 500;
+  /* .contents-title-cates{
+      font-weight: 500px;
+  } */
+  margin-bottom: 40px;
+}
+@media (max-width: 700px) {
+  .contents .contents-title {
+    margin-top: 20px;
+    margin-left: 10px;
+  }
+}
+.contents .contents-title .cate {
+  font-weight: 600;
+}
+.contents table {
+  width: 80%;
+  text-align: center;
+}
+.contents table th, .contents table td {
+  padding: 20px;
+}
+.contents table tr:not(:first-child):hover {
+  background-color: #ddd;
+}
+.contents table .label {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #000000;
+}
+
+/*# sourceMappingURL=app.css.map */
