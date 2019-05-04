@@ -7,6 +7,8 @@ class Main extends Component {
         this.state = {
             categories: ["All", "sub"],
         }
+
+        
     }
 
     render() {
@@ -14,7 +16,7 @@ class Main extends Component {
         const {categories} = this.state;
 
         return (
-            <div className="contents">
+            <div className="contents" ref={ this.props.mainRef }>
                 <div className="contents-title">
                     {
                         categories.length ? <div className="contents-title-cates">{

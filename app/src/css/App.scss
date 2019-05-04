@@ -15,10 +15,10 @@ body {
     position: fixed;
     height: 100%;
     width: 300px;
-    overflow: auto;
+    
 
     @media (max-width: $screen-md){
-        width:100%;
+        width:100% !important;
         height:auto;
         position: relative;
         padding-bottom: 20px;
@@ -41,9 +41,10 @@ body {
         display:table;
         clear: both;
     }
-    
-    .sidebar-title {
+    .sidebar-body{
         margin-top: 20px;
+    }
+    .sidebar-title {
         text-align: center;
         h1{
             font-size: 30px;
@@ -120,7 +121,7 @@ body {
     padding: 100px 0 0 50px;
     max-width: 800px;
     @media (max-width: $screen-md){
-        margin-left: 0;
+        margin-left: 0 !important;
         padding:10px;
     }
     .contents-title{
@@ -153,4 +154,8 @@ body {
             border-bottom: 1px solid $black;
         }
     }
+}
+
+.hide {
+    display:none;
 }

@@ -162,11 +162,10 @@ body {
   position: fixed;
   height: 100%;
   width: 300px;
-  overflow: auto;
 }
 @media (max-width: 700px) {
   .sidebar {
-    width: 100%;
+    width: 100% !important;
     height: auto;
     position: relative;
     padding-bottom: 20px;
@@ -190,8 +189,10 @@ body {
   display: table;
   clear: both;
 }
-.sidebar .sidebar-title {
+.sidebar .sidebar-body {
   margin-top: 20px;
+}
+.sidebar .sidebar-title {
   text-align: center;
 }
 .sidebar .sidebar-title h1 {
@@ -260,7 +261,7 @@ body {
 }
 @media (max-width: 700px) {
   .contents {
-    margin-left: 0;
+    margin-left: 0 !important;
     padding: 10px;
   }
 }
@@ -300,6 +301,10 @@ body {
 .contents table .label {
   margin-bottom: 20px;
   border-bottom: 1px solid #000000;
+}
+
+.hide {
+  display: none;
 }
 
 /*# sourceMappingURL=app.css.map */
