@@ -20,7 +20,7 @@ class Main extends Component {
                         categories.length ? <div className="contents-title-cates">{
                             categories.map((value, index) => {
                                 return index != categories.length-1 ?
-                                    (<span className="cate">{value}  ></span>):(<span className="cate">{value}</span>);
+                                    (<span key={index} className="cate">{value}  <i className={'icon-right-open'}></i></span>):(<span key={index} className="cate">{value}</span>);
                                 
                             })
                         }
@@ -28,24 +28,28 @@ class Main extends Component {
                     }
                 </div>
                 <table>
+                <thead>
                     <tr className="label">
                         <th>Product name</th>
                         <th>Quantity</th>
                         <th>Unit price</th>
                         <th></th>
                     </tr>
+                    </thead>
+                    <tbody>
                     <tr>
                         <td>product1</td>
                         <td>10</td>
                         <td>$10.20</td>
-                        <td>X</td>
+                        <td><i className="icon-trash"></i></td>
                     </tr>
                     <tr>
                         <td>product1</td>
                         <td>10</td>
                         <td>$10.20</td>
-                        <td>X</td>
+                        <td><i className="icon-trash"></i></td>
                     </tr>
+                    </tbody>
                 </table>
             </div>
         );

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import "https://fonts.googleapis.com/css?family=Open+Sans:300,400,800";
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
@@ -54,6 +55,101 @@ table {
 }
 
 /* Color */
+@font-face {
+  font-family: "fontello";
+  src: url("./font/fontello.eot?37189356");
+  src: url("./font/fontello.eot?37189356#iefix") format("embedded-opentype"), url("./font/fontello.woff2?37189356") format("woff2"), url("./font/fontello.woff?37189356") format("woff"), url("./font/fontello.ttf?37189356") format("truetype"), url("./font/fontello.svg?37189356#fontello") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'fontello';
+    src: url('../font/fontello.svg?37189356#fontello') format('svg');
+  }
+}
+*/
+[class^=icon-]:before, [class*=" icon-"]:before {
+  font-family: "fontello";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: 0.2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: 0.2em;
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+
+.icon-right-open:before {
+  content: "";
+}
+
+/* '' */
+.icon-resize-small:before {
+  content: "";
+}
+
+/* '' */
+.icon-resize-full:before {
+  content: "";
+}
+
+/* '' */
+.icon-minus:before {
+  content: "";
+}
+
+/* '' */
+.icon-plus:before {
+  content: "";
+}
+
+/* '' */
+.icon-home:before {
+  content: "";
+}
+
+/* '' */
+.icon-left:before {
+  content: "";
+}
+
+/* '' */
+.icon-trash:before {
+  content: "";
+}
+
+/* '' */
+.icon-window-maximize:before {
+  content: "";
+}
+
+/* '' */
+.icon-window-minimize:before {
+  content: "";
+}
+
+/* '' */
 body {
   font-family: "Open Sans", sans-serif;
 }
@@ -76,13 +172,35 @@ body {
     padding-bottom: 20px;
   }
 }
+.sidebar .sidebar-icons {
+  margin-top: 15px;
+}
+.sidebar .sidebar-icon {
+  font-size: 15px;
+  float: right;
+  padding: 10px 5px 10px 5px;
+  text-align: center;
+}
+.sidebar .sidebar-icon:hover {
+  cursor: pointer;
+  background: #4f8cb8;
+}
+.sidebar .sidebar-icons::after {
+  content: "";
+  display: table;
+  clear: both;
+}
 .sidebar .sidebar-title {
-  padding-top: 50px;
+  margin-top: 20px;
   text-align: center;
 }
 .sidebar .sidebar-title h1 {
   font-size: 30px;
   font-weight: 600;
+  overflow-wrap: break-word;
+}
+.sidebar .sidebar-title h1 .icon-left {
+  cursor: pointer;
 }
 .sidebar .sidebar-title .sidebar-title-border {
   width: 80%;
@@ -93,17 +211,46 @@ body {
 }
 .sidebar .sidebar-contents {
   margin-top: 20px;
-  margin-left: 30px;
-  text-align: left;
 }
 @media (max-width: 700px) {
   .sidebar .sidebar-contents {
-    margin-left: 0;
+    margin: auto;
     text-align: center;
   }
 }
 .sidebar .sidebar-contents .sidebar-category {
-  margin-top: 15px;
+  padding: 15px 30px 15px 30px;
+  height: 20px;
+}
+.sidebar .sidebar-contents .sidebar-category .category-name {
+  float: left;
+  overflow-wrap: break-word;
+  width: 75%;
+}
+.sidebar .sidebar-contents .sidebar-category .sub-category-arrow {
+  margin-left: 30px;
+  float: right;
+}
+.sidebar .sidebar-contents .sidebar-category .sub-category-arrow::after {
+  content: "";
+  clear: both;
+}
+@media (max-width: 700px) {
+  .sidebar .sidebar-contents .sidebar-category {
+    /* padding: 15px 60px 15px 60px; */
+  }
+  .sidebar .sidebar-contents .sidebar-category .category-name {
+    float: none;
+  }
+  .sidebar .sidebar-contents .sidebar-category .sub-category-arrow {
+    margin-left: 30px;
+    float: none;
+  }
+}
+.sidebar .sidebar-contents .sidebar-category:hover {
+  background: #4f8cb8;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .contents {
@@ -141,8 +288,14 @@ body {
 .contents table th, .contents table td {
   padding: 20px;
 }
-.contents table tr:not(:first-child):hover {
+.contents table tbody tr:hover {
   background-color: #ddd;
+}
+.contents table .icon-trash {
+  font-size: 20px;
+}
+.contents table .icon-trash:hover {
+  cursor: pointer;
 }
 .contents table .label {
   margin-bottom: 20px;

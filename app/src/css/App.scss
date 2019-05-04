@@ -23,12 +23,36 @@ body {
         position: relative;
         padding-bottom: 20px;
     } 
+    .sidebar-icons{
+        margin-top:15px;
+    }
+    .sidebar-icon{
+        font-size: 15px;
+        float:right;
+        padding: 10px 5px 10px 5px;
+        text-align: center;
+    }
+    .sidebar-icon:hover{
+        cursor:pointer;
+        background: $highlight;
+    }
+    .sidebar-icons::after{
+        content: "";
+        display:table;
+        clear: both;
+    }
+    
     .sidebar-title {
-        padding-top: 50px;
+        margin-top: 20px;
         text-align: center;
         h1{
             font-size: 30px;
             font-weight: 600;
+            overflow-wrap: break-word;
+
+            .icon-left{
+                cursor: pointer;
+            }
         }
         .sidebar-title-border{
             width:80%;
@@ -41,18 +65,54 @@ body {
 
     .sidebar-contents{
         margin-top: 20px;
-        margin-left:30px;
-        text-align: left;
         @media (max-width: $screen-md){
-            margin-left: 0;
+            margin:auto;
             text-align: center;
         }
 
         .sidebar-category{
-            margin-top: 15px;    
+            padding: 15px 30px 15px 30px;
+            height:20px;
+            .category-name{
+                float:left;
+                overflow-wrap: break-word;
+                width:75%;
+            }
+            .sub-category-arrow{
+                margin-left:30px;
+                float:right;
+            }
+            .sub-category-arrow::after{
+                content: "";
+                clear: both;
+            }
+            @media (max-width: $screen-md){
+                /* padding: 15px 60px 15px 60px; */
+                .category-name{
+                    float:none;
+                }
+                .sub-category-arrow{
+                    margin-left:30px;
+                    float:none;
+                }
+                
+            }
+        }
+        .sidebar-category:hover{
+            background: $highlight;
+            border-radius: 10px;
+            cursor: pointer;
+
         }
     }
 
+}
+
+.sidebar-category{
+            
+            
+            
+    
 }
 
 .contents{
@@ -85,11 +145,12 @@ body {
         th, td{
             padding:20px;
         }
-        tr:not(:first-child):hover {background-color: #ddd;}
+        tbody tr:hover {background-color: #ddd;}
+        .icon-trash{ font-size:20px; }
+        .icon-trash:hover{ cursor: pointer; }
         .label{
             margin-bottom: 20px;
             border-bottom: 1px solid $black;
-            
         }
     }
 }
