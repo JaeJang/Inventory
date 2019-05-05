@@ -3,6 +3,7 @@ import _ from 'lodash';
 import classnames from 'classnames';
 
 import Category from './category';
+import { getAllCategories } from '../controllers/controller'
 
 import {collapsing, reverse} from '../helpers/collapsing';
 import {SIDEBAR_WIDTH, COLLAPSED_SIDEBAT_WIDTH} from '../values/elementSize';
@@ -15,7 +16,7 @@ class Sidebar extends Component {
             title: "Inventory",
             categories:[],
             currentSubCate:[],
-            currentCateId: null,
+            currentCateId: 0,
             isCollapsed: false,
             
         }
@@ -33,87 +34,128 @@ class Sidebar extends Component {
     }
 
     initCategories() {
-        this.setState({
+        getAllCategories((data) => {
+            this.setState({
+                categories:data
+            }, () => {
+                this._setCurrentSubCate();
+            });
+        })
+        /* this.setState({
             categories:[
                 {
                     "id": 1,
                     "name": "Category 1",
-                    "parent_id": 0,
+                    "parent": null,
                 },
                 {
                     "id": 2,
                     "name": "Category 2",
-                    "parent_id": 0,
+                    "parent": null,
                 },
                 {
                     "id": 3,
                     "name": "Category 3",
-                    "parent_id": 2,
+                    "parent": 2,
                 },
                 {
                     "id": 4,
                     "name": "Category 4",
-                    "parent_id": 2,
+                    "parent": 2,
                 },
                 {
                     "id": 5,
                     "name": "Category 5",
-                    "parent_id": 3,
+                    "parent": 3,
                 },{
                     "id": 6,
                     "name": "Category 6",
-                    "parent_id": 5,
+                    "parent": 5,
                 },
 
             ],
             currentCateId: 0,
         },()=>{
             this._setCurrentSubCate();
-        });
+        }); */
     }
 
     _setCurrentSubCate(){
         const {categories} = this.state;
-        let current = {};
+        let current = [];
         let newCategories = {};
+
         for(let i = 0; i < categories.length; i++) {
             categories[i]["hasSub"] = false;
-            newCategories[categories[i].id] = categories[i]; 
-            if(!categories[i].parent_id){
-                current[categories[i].id] = categories[i];
+            if(!categories[i].parent){
+                    current.push(categories[i])
             } else {
-                newCategories[categories[i].parent_id].hasSub = true;
-                //categories[(categories[i].parent_id -1)].hasSub = true;
+                let id = categories[i].parent.cateId;
+                let parentCate = _.find(categories, {cateId:id});
+                parentCate["hasSub"] = true;
+                
             }
         }
+        /* for(let i = 0; i < categories.length; i++) {
+            categories[i]["hasSub"] = false;
+            newCategories[categories[i].id] = categories[i]; 
+            //if(!categories[i].parent){
+            if(_.get(categories,'[i].parent.cateId',true)){
+                current[categories[i].id] = categories[i];
+                current.push()
+            } else {
+                //newCategories[categories[i].parent.cateId].hasSub = true;
+                categories[i]["hasSub"] = false;
+                //categories[(categories[i].parent -1)].hasSub = true;
+            }
+        } */
         this.setState({
             currentSubCate: current,
-            categories: newCategories,
+            categories: categories,
         }, ()=>{
 
         });
     }
 
-    callSubCategories(parent_id=0) {
+    callSubCategories(parentId=null) {
+        console.log(parentId);
         const {categories, currentCateId} = this.state;
-        let subs = {};
-        for(let key in categories){
-            let pid = categories[key].parent_id;
-            if(pid == parent_id){
-                subs[key] = categories[key];
+        let subs = [];
+        
+        for(let i = 0; i < categories.length; i++){
+            let pid = _.get(categories, "[i].parent.cateId");
+            if(categories[i].parent){
+                if(categories[i].parent.cateId == parentId){
+                    subs.push(categories[i]);    
+                }
+            } else if (parentId == null) {
+                subs.push(categories[i]);
             }
+            /* if(pid == parentId){
+                subs.push(categories[i]);
+            } */
         }
+        /* for(let category in categories){
+            let pid = category.parent.cateId;
+            //let pid = _.get(categories, '[key].parent');
+            if(pid == parentId){
+                //subs[key] = categories[key];
+                subs.push(category);
+            }
+        } */
         /* for(let i = 0; i < categories.length; i++) {
-            let pid = categories[i].parent_id;
-            if(pid == parent_id){
+            let pid = categories[i].parent;
+            if(pid == parent){
                 subs.push(categories[i]);
             }
         } */
-        let title = _.get(categories,`[${parent_id}].name`) ? categories[parent_id].name : "Inventory";
+        //let title = _.get(categories,`[${parentId}].name`) ? categories[parentId].name : "Inventory";
+        let title = _.find(categories,{cateId:parentId}) ? (_.find(categories,{cateId:parentId})).name : "Inventory";
+        console.log(subs);
         this.setState({
             title: title,
             currentSubCate: subs,
-            currentCateId: parent_id,
+            currentCateId: parentId,
         }, () =>{
 
         });
@@ -122,7 +164,7 @@ class Sidebar extends Component {
     
 
     render() {
-        const {title, currentSubCate, currentCateId, isCollapsed} = this.state;
+        const {title, currentSubCate, currentCateId, isCollapsed, categories} = this.state;
 
         return (
             <div className="sidebar" ref={this.sidbarRef}>
@@ -152,7 +194,13 @@ class Sidebar extends Component {
                         currentCateId ? 
                         <span 
                             className={ classnames("sidebar-icon", {"hide":isCollapsed}) }
-                            onClick={ () => {this.callSubCategories(this.state.categories[currentCateId].parent_id)} }
+                            onClick={ () => {
+                                //this.callSubCategories(this.state.categories[currentCateId].parent.cateId)} 
+                                    this.callSubCategories(
+                                        _.get((_.find(categories,{cateId:currentCateId})).parent,".cateId",null)
+                                    )
+                                }
+                            }
                         >
                             <i className="icon-left"/>
                         </span> : null
@@ -167,12 +215,10 @@ class Sidebar extends Component {
                     </div>
                     <div className="sidebar-contents">
                         {
-                            Object.keys(currentSubCate).length ? Object.keys(currentSubCate).map(key => {
-                                {/* return value.hasSub ? 
-                                    <Category key={index} details={value} onclick={this.callSubCategories}/>
-                                    : <Category key={index} details={value}/> */}
-                                return <Category key={key} details={currentSubCate[key]} onclick={this.callSubCategories}/>
-                            }): null
+                            
+                            currentSubCate.length ? currentSubCate.map((value, index) => {
+                                return <Category key={index} details={value} onclick={this.callSubCategories}/>
+                            }) :null
                         }
 
                     </div>

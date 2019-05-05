@@ -22,5 +22,14 @@ public class ItemService{
 		}
 		return itemRepository.save(item);
 	}
+	
+	public Item findById(Integer itemId) {
+		return itemRepository.getByItemId(itemId);
+	}
+	
+	public void delete(Integer itemId) {
+		Item tmp = itemRepository.getByItemId(itemId);
+		itemRepository.delete(tmp);
+	}
 
 }

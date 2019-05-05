@@ -7,5 +7,6 @@ import jae.inventory.api.entity.Category;
 
 @Repository
 public interface CategoryRepository extends CrudRepository<Category, Integer>{
-
+	
+	Category getByCateId(Integer cateId);
 }

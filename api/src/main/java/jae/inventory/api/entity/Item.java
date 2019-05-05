@@ -14,22 +14,33 @@ public class Item {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="item_id")
-	private Integer item_id;
+	@Column(name="itemId")
+	private Integer itemId;
 	
-	//@NotBlank(message="Price cannot be blank")
+	@Column(name="itemName")
+	private String itemName;
+	
+
 	@Column(name="price", columnDefinition="Decimal(10,2)")
 	private Double price;
 	
 	@Column(name="description")
 	private String description;
-
-	public Integer getItem_id() {
-		return item_id;
+	
+	public String getItemName() {
+		return itemName;
+	}
+	
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
 	}
 
-	public void setItem_id(Integer item_id) {
-		this.item_id = item_id;
+	public Integer getitemId() {
+		return itemId;
+	}
+
+	public void setitemId(Integer itemId) {
+		this.itemId = itemId;
 	}
 
 	public Double getPrice() {

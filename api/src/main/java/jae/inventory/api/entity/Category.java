@@ -16,24 +16,26 @@ public class Category {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="cate_id")
-	private Integer cate_id;
+	@Column(name="cateId")
+	private Integer cateId;
 	
 	//@NotBlank(message ="Name cannot be blank")
 	@Column(name="name")
 	private String name;
 	
 	//@PrimaryKeyJoinColumn
-	@JoinColumn(name = "parent_id")
+	@JoinColumn(name = "parent")
 	@ManyToOne(cascade={CascadeType.ALL})
 	private Category parent;
 
-	public Integer getCate_id() {
-		return cate_id;
+	
+
+	public Integer getCateId() {
+		return cateId;
 	}
 
-	public void setCate_id(Integer cate_id) {
-		this.cate_id = cate_id;
+	public void setCateId(Integer cateId) {
+		this.cateId = cateId;
 	}
 
 	public String getName() {
@@ -44,13 +46,14 @@ public class Category {
 		this.name = name;
 	}
 
-	public Category getParent_id() {
+	public Category getParent() {
 		return parent;
 	}
 
-	public void setParent_id(Category parent) {
+	public void setParent(Category parent) {
 		this.parent = parent;
 	}
+
 
 	
 	

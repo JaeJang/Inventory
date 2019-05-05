@@ -8,13 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 
 @Entity
+
 @Table(name = "Inventory")
 public class Inventory {
 	
@@ -23,19 +21,16 @@ public class Inventory {
 	@Column(name="id")
 	private Integer id;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.REMOVE)
 	//@PrimaryKeyJoinColumn
-	@JoinColumn(name="item_id")
-	@NotBlank(message = "item id cannot be blank")
-	private Item item_id;
+	@JoinColumn(name="item")
+	private Item item;
 	
 	@ManyToOne
 //	@PrimaryKeyJoinColumn
-	@JoinColumn(name="cate_id")
-	@NotBlank(message = "cate_id cannot be blank")
-	private Category cate;
+	@JoinColumn(name="cateId")
+	private Category cateId;
 	
-	@NotBlank(message = "Quantity cannot be blank")
 	@Column(name="quantity")
 	private Integer quantity;
 
@@ -47,20 +42,21 @@ public class Inventory {
 		this.id = id;
 	}
 
-	public Item getItem_id() {
-		return item_id;
+
+	public Item getItem() {
+		return item;
 	}
 
-	public void setItem_id(Item item_id) {
-		this.item_id = item_id;
+	public void setItem(Item item) {
+		this.item = item;
 	}
 
-	public Category getCate_id() {
-		return cate;
+	public Category getCateId() {
+		return cateId;
 	}
 
-	public void setCate_id(Category cate_id) {
-		this.cate = cate_id;
+	public void setCateId(Category cateId) {
+		this.cateId = cateId;
 	}
 
 	public Integer getQuantity() {
@@ -70,6 +66,7 @@ public class Inventory {
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
+
 	
 	
 }

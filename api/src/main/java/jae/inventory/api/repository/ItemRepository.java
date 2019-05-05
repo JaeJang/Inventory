@@ -7,5 +7,5 @@ import jae.inventory.api.entity.Item;
 
 @Repository
 public interface ItemRepository extends CrudRepository<Item, Integer>{
-
+	Item getByItemId(Integer itemId);
 }

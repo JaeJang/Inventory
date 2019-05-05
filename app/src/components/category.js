@@ -18,11 +18,10 @@ class Category extends Component {
 
     render() {
         const category = this.props.details;
-
         return (
             <div 
                 className="sidebar-category"
-                onClick = { ()=>{ this.props.onclick(category.id) } }
+                onClick = { ()=>{ this.props.onclick(category.cateId) } }
             >
                 <span className="category-name">{category.name}</span>
                 {

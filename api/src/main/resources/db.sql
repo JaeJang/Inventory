@@ -23,22 +23,22 @@ CREATE TABLE Inventory(
 	CONSTRAINT fk_inven_cate FOREIGN KEY(cate_id) REFERENCES Category(cate_id)
 );
 
-INSERT INTO Item (price, description) VALUES(13.22, 'Frist Item inserted');
-INSERT INTO Item (price, description) VALUES(165.11, 'Second Item inserted');
-INSERT INTO Item (price, description) VALUES(15, 'Third Item inserted');
-INSERT INTO Item (price, description) VALUES(19.1, 'Forth Item inserted');
-INSERT INTO Item (price, description) VALUES(2019.06, 'Fifth Item inserted');
-INSERT INTO Item (price, description) VALUES(2, 'Sixth Item inserted');
-INSERT INTO Item (price, description) VALUES(0.58, 'Seventh Item inserted');
-INSERT INTO Item (price, description) VALUES(189.11, 'Eighth Item inserted');
-INSERT INTO Item (price, description) VALUES(195, 'Tenth Item inserted');
-INSERT INTO Item (price, description) VALUES(2019.05, 'Eleventh Item inserted');
+INSERT INTO Item (price, description, item_name) VALUES(13.22, 'Frist Item inserted', "First");
+INSERT INTO Item (price, description, item_name) VALUES(165.11, 'Second Item inserted', "Second");
+INSERT INTO Item (price, description, item_name) VALUES(15, 'Third Item inserted', "Third");
+INSERT INTO Item (price, description, item_name) VALUES(19.1, 'Forth Item inserted', "Forth");
+INSERT INTO Item (price, description, item_name) VALUES(2019.06, 'Fifth Item inserted', "Fifth");
+INSERT INTO Item (price, description, item_name) VALUES(2, 'Sixth Item inserted', "Sixth");
+INSERT INTO Item (price, description, item_name) VALUES(0.58, 'Seventh Item inserted', "Seventh");
+INSERT INTO Item (price, description, item_name) VALUES(189.11, 'Eighth Item inserted', "Eighth");
+INSERT INTO Item (price, description, item_name) VALUES(195, 'Ninth Item inserted', "Ninth");
+INSERT INTO Item (price, description, item_name) VALUES(2019.05, 'Tenth Item inserted', "Tenth");
 
 
 
-INSERT INTO Category (name, parent_id) VALUES('Category 1', 0); 
-INSERT INTO Category (name, parent_id) VALUES('Category 2', 0);
-INSERT INTO Category (name, parent_id) VALUES('Category 3', 0);
+INSERT INTO Category (name, parent_id) VALUES('Category 1', null); 
+INSERT INTO Category (name, parent_id) VALUES('Category 2', null);
+INSERT INTO Category (name, parent_id) VALUES('Category 3', null);
 INSERT INTO Category (name, parent_id) VALUES('SubCategory 2-1', 2);
 INSERT INTO Category (name, parent_id) VALUES('SubCategory 2-2', 2);
 INSERT INTO Category (name, parent_id) VALUES('SubCategory 2-3', 2);
