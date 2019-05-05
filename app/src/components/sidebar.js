@@ -6,7 +6,6 @@ import Category from './category';
 import { getAllCategories } from '../controllers/controller'
 
 import {collapsing, reverse} from '../helpers/collapsing';
-import {SIDEBAR_WIDTH, COLLAPSED_SIDEBAT_WIDTH} from '../values/elementSize';
 
 class Sidebar extends Component {
 
@@ -16,7 +15,7 @@ class Sidebar extends Component {
             title: "Inventory",
             categories:[],
             currentSubCate:[],
-            currentCateId: 0,
+            currentCate:null,
             isCollapsed: false,
             
         }
@@ -41,49 +40,11 @@ class Sidebar extends Component {
                 this._setCurrentSubCate();
             });
         })
-        /* this.setState({
-            categories:[
-                {
-                    "id": 1,
-                    "name": "Category 1",
-                    "parent": null,
-                },
-                {
-                    "id": 2,
-                    "name": "Category 2",
-                    "parent": null,
-                },
-                {
-                    "id": 3,
-                    "name": "Category 3",
-                    "parent": 2,
-                },
-                {
-                    "id": 4,
-                    "name": "Category 4",
-                    "parent": 2,
-                },
-                {
-                    "id": 5,
-                    "name": "Category 5",
-                    "parent": 3,
-                },{
-                    "id": 6,
-                    "name": "Category 6",
-                    "parent": 5,
-                },
-
-            ],
-            currentCateId: 0,
-        },()=>{
-            this._setCurrentSubCate();
-        }); */
     }
 
     _setCurrentSubCate(){
         const {categories} = this.state;
         let current = [];
-        let newCategories = {};
 
         for(let i = 0; i < categories.length; i++) {
             categories[i]["hasSub"] = false;
@@ -117,9 +78,8 @@ class Sidebar extends Component {
         });
     }
 
-    callSubCategories(parentId=null) {
-        console.log(parentId);
-        const {categories, currentCateId} = this.state;
+    callSubCategories(parentId = null) {
+        const {categories} = this.state;
         let subs = [];
         
         for(let i = 0; i < categories.length; i++){
@@ -151,20 +111,21 @@ class Sidebar extends Component {
         } */
         //let title = _.get(categories,`[${parentId}].name`) ? categories[parentId].name : "Inventory";
         let title = _.find(categories,{cateId:parentId}) ? (_.find(categories,{cateId:parentId})).name : "Inventory";
+        let currentCate = _.find(categories, {cateId:parentId});
         console.log(subs);
         this.setState({
             title: title,
             currentSubCate: subs,
-            currentCateId: parentId,
+            currentCate: currentCate,
         }, () =>{
-
+            this.props.onchange(this.state.currentCate);
         });
 
     }
     
 
     render() {
-        const {title, currentSubCate, currentCateId, isCollapsed, categories} = this.state;
+        const {title, currentSubCate, currentCate, isCollapsed, categories} = this.state;
 
         return (
             <div className="sidebar" ref={this.sidbarRef}>
@@ -179,7 +140,6 @@ class Sidebar extends Component {
                                 () => {
                                     !isCollapsed? collapsing(this) : reverse(this);    
                                 } 
-                                //!isCollapsed? ()=>{}this._collapsing : this._reverse
                             }    
                         />
                     </span>
@@ -191,14 +151,15 @@ class Sidebar extends Component {
                     </span>
                     
                     {
-                        currentCateId ? 
+                        currentCate ? 
                         <span 
                             className={ classnames("sidebar-icon", {"hide":isCollapsed}) }
                             onClick={ () => {
                                 //this.callSubCategories(this.state.categories[currentCateId].parent.cateId)} 
                                     this.callSubCategories(
-                                        _.get((_.find(categories,{cateId:currentCateId})).parent,".cateId",null)
+                                        _.get(currentCate,"parent.cateId")
                                     )
+                                    
                                 }
                             }
                         >

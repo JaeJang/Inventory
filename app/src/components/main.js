@@ -1,4 +1,7 @@
 import React, {Component} from  'react';
+import _ from 'lodash';
+
+import { getInventory } from '../controllers/controller';
 
 class Main extends Component {
 
@@ -6,11 +9,33 @@ class Main extends Component {
         super(props);
         this.state = {
             categories: ["All", "sub"],
+            inventory: null,
+            categoryList: null,
         }
 
-        
+        this._updateInventory = this._updateInventory.bind(this);
+        this._updateCategoryList = this._updateCategoryList.bind(this);
+    }
+    
+    componentDidMount(){
+        this._updateInventory();
+        this._updateCategoryList();
     }
 
+    componentWillUpdate(){
+        /* const cateId = _.get(this.props,'[currentCate]');
+        console.log(cateId);
+        this._updateInventory(cateId);
+        this._updateCategoryList(); */
+    }
+
+    _updateInventory(cateId) {
+        getInventory(data => {this.setState({inventory:data})}, cateId);
+    }
+
+    _updateCategoryList(){
+        console.log("update category list");
+    }
     render() {
 
         const {categories} = this.state;

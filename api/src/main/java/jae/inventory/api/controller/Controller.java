@@ -55,22 +55,22 @@ public class Controller {
 		return new ResponseEntity<Item>(newItem, HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/allInventory")
+	@GetMapping("/inventory")
 	public Iterable<Inventory> getAllInventory(){
 		return inventoryService.findAllInventory();
 	}
 	
-	@GetMapping("/allItems")
+	@GetMapping("/item")
 	public Iterable<Item> getAllItems(){
 		return itemService.findAllItem();
 	}
 	
-	@GetMapping("/allCategories")
+	@GetMapping("/category")
 	public Iterable<Category> getAllCategories(){
 		return categoryServie.findAllCategories();
 	}
 	
-	@GetMapping("/category/{cateId}")
+	@GetMapping("/inventory/{cateId}")
 	public List<Inventory> getItmesByCategory(@PathVariable Integer cateId) {
 		Iterable<Category> categories = categoryServie.findAllCategories();
 		List<Category> categoryList = new ArrayList<Category>();

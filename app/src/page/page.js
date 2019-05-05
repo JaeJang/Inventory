@@ -7,15 +7,33 @@ class Page extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            currentCate: null,
+        }
+    }
+    
+    componentDidMount(){
         this.mainRef = React.createRef();
-        getAllCategories();
+    }
+    componentDidUpdate(){
     }
 
     render() {
+        const {currentCate} = this.state;
+
         return (
             <div className="app-layout">
-                <Sidebar mainRef = { this.mainRef }/>
-                <Main mainRef = { this.mainRef }/>
+                <Sidebar 
+                    mainRef = { this.mainRef } 
+                    onchange={ currentCate => {
+                            this.setState({currentCate: currentCate})
+                        }
+                    }
+                />
+                <Main 
+                    mainRef = { this.mainRef } 
+                    currentCate = {currentCate}
+                />
             </div>
         );
     }
