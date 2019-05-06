@@ -27,6 +27,10 @@ class Sidebar extends Component {
         this._reverse = this._reverse.bind(this); */
     }
 
+    componentWillMount(){
+        this.props.callSubCategoriesRef(this.callSubCategories);
+    }
+
     componentDidMount() {
         this.initCategories();
         this.sidbarRef = React.createRef();
@@ -112,7 +116,7 @@ class Sidebar extends Component {
         //let title = _.get(categories,`[${parentId}].name`) ? categories[parentId].name : "Inventory";
         let title = _.find(categories,{cateId:parentId}) ? (_.find(categories,{cateId:parentId})).name : "Inventory";
         let currentCate = _.find(categories, {cateId:parentId});
-        console.log(subs);
+        //console.log(subs);
         this.setState({
             title: title,
             currentSubCate: subs,
@@ -131,7 +135,9 @@ class Sidebar extends Component {
             <div className="sidebar" ref={this.sidbarRef}>
                 <div className="sidebar-icons">
 
-                    <span className="sidebar-icon">
+                    <span className="sidebar-icon" 
+                          title = {isCollapsed ? "Show category bar" : "Hide category bar"}
+                    >
                         <i className={ 
                             classnames({"icon-resize-small":!isCollapsed},
                                         {"icon-resize-full":isCollapsed})
@@ -146,6 +152,7 @@ class Sidebar extends Component {
                     <span 
                         className={ classnames("sidebar-icon", {"hide":isCollapsed})}
                         onClick = {() => { this.callSubCategories()} }
+                        title="Top category"
                     >
                         <i className="icon-home"/>
                     </span>
@@ -154,6 +161,7 @@ class Sidebar extends Component {
                         currentCate ? 
                         <span 
                             className={ classnames("sidebar-icon", {"hide":isCollapsed}) }
+                            title = "Previous category"
                             onClick={ () => {
                                 //this.callSubCategories(this.state.categories[currentCateId].parent.cateId)} 
                                     this.callSubCategories(

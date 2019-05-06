@@ -21,10 +21,13 @@ body {
         width:100% !important;
         height:auto;
         position: relative;
-        padding-bottom: 20px;
+        /* padding-bottom: 20px; */
     } 
     .sidebar-icons{
-        margin-top:15px;
+        padding-top:15px;
+        @media (max-width: $screen-md){
+            padding-top:0px;
+        }
     }
     .sidebar-icon{
         font-size: 15px;
@@ -95,9 +98,14 @@ body {
                 .sub-category-arrow{
                     margin-left:30px;
                     float:none;
+                    position:fixed;
                 }
                 
             }
+        }
+        .sidebar-category::after{
+            content:"";
+            clear: both;
         }
         .sidebar-category:hover{
             background: $highlight;
@@ -138,13 +146,21 @@ body {
         .cate{
             font-weight: 600;
         }
+        .cate.previous:hover{
+            cursor:pointer;
+            text-decoration: underline; 
+        }
     }
 
     table{
-        width: 80%;
+        width: 100%;
         text-align: center;
         th, td{
             padding:20px;
+        }
+        .rows{
+            border-bottom:1px dashed $gray;
+            
         }
         tbody tr:hover {background-color: #ddd;}
         .icon-trash{ font-size:20px; }

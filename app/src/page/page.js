@@ -10,12 +10,18 @@ class Page extends Component {
         this.state = {
             currentCate: null,
         }
+
+        this.categorySelectFromMain = this.categorySelectFromMain.bind(this);
     }
     
-    componentDidMount(){
+    componentWillMount(){
         this.mainRef = React.createRef();
     }
     componentDidUpdate(){
+    }
+
+    categorySelectFromMain(cateId){
+        this.callSubCategories(cateId);
     }
 
     render() {
@@ -29,10 +35,12 @@ class Page extends Component {
                             this.setState({currentCate: currentCate})
                         }
                     }
+                    callSubCategoriesRef = {ref => {this.callSubCategories = ref}}
                 />
                 <Main 
                     mainRef = { this.mainRef } 
                     currentCate = {currentCate}
+                    categorySelectFromMain = {this.categorySelectFromMain}
                 />
             </div>
         );

@@ -105,6 +105,6 @@ public class Controller {
 		Integer inventoryId = inventoryService.findByItem(item).getId();
 		inventoryService.delete(inventoryId);
 		
-		return new ResponseEntity<String>("The item has been deleted", HttpStatus.OK);
+		return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 	}
 }
