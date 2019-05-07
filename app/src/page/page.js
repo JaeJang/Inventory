@@ -10,7 +10,6 @@ class Page extends Component {
         this.state = {
             currentCate: null,
         }
-
         this.categorySelectFromMain = this.categorySelectFromMain.bind(this);
     }
     

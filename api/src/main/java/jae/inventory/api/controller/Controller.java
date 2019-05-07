@@ -1,31 +1,26 @@
 package jae.inventory.api.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jae.inventory.api.entity.Category;
 import jae.inventory.api.entity.Inventory;
 import jae.inventory.api.entity.Item;
-import jae.inventory.api.repository.InventoryRepository;
 import jae.inventory.api.service.CategoryService;
 import jae.inventory.api.service.InventoryService;
 import jae.inventory.api.service.ItemService;
+
+
 
 @RestController
 @RequestMapping("/api")
@@ -108,20 +103,6 @@ public class Controller {
 	public Iterable<Category> getAllCategories(){
 		return categoryServie.findAllCategories();
 	}
-	
-	// Delete an inventory information from the database
-	// When an inventory is deleted, the related item will be deleted accordingly
-	// PARAM	: Item id to be deleted
-	// RETURN	: true if it is success
-	/*
-	@DeleteMapping("/item/{itemId}")
-	public ResponseEntity<?> deleteItemById(@PathVariable Integer itemId){
-		Item item = itemService.findById(itemId);
-		Integer inventoryId = inventoryService.findByItem(item).getId();
-		inventoryService.delete(inventoryId);
-		
-		return new ResponseEntity<Boolean>(true, HttpStatus.OK);
-	}*/
 	
 	// Delete an item from the database with the passed item id
 	// This deletes the corresponding inventory entry
