@@ -298,10 +298,13 @@ body {
 }
 .contents table {
   width: 100%;
-  text-align: center;
+  /* text-align: center; */
 }
 .contents table th, .contents table td {
   padding: 20px;
+}
+.contents table tr {
+  text-align: left;
 }
 .contents table .rows {
   border-bottom: 1px dashed #242D32;
@@ -318,6 +321,7 @@ body {
 .contents table .label {
   margin-bottom: 20px;
   border-bottom: 1px solid #000000;
+  font-weight: bold;
 }
 
 .hide {

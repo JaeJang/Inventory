@@ -39,6 +39,7 @@ public class Controller {
 	@Autowired	
 	private CategoryService categoryServie;
 	
+	/*
 	@PostMapping("/item")
 	public ResponseEntity<?> addNewItem(@RequestBody Item item, BindingResult result){
 		if(result.hasErrors()) {
@@ -54,27 +55,24 @@ public class Controller {
 		
 		return new ResponseEntity<Item>(newItem, HttpStatus.CREATED);
 	}
+	*/
 	
+	// Get all inventory information from DB
 	@GetMapping("/inventory")
 	public Iterable<Inventory> getAllInventory(){
 		return inventoryService.findAllInventory();
 	}
 	
-	@GetMapping("/item")
-	public Iterable<Item> getAllItems(){
-		return itemService.findAllItem();
-	}
-	
-	@GetMapping("/category")
-	public Iterable<Category> getAllCategories(){
-		return categoryServie.findAllCategories();
-	}
-	
+	// Get inventories for a specific category including all sub-categories items
+	// PARAM	: Category id 
+	// RETUEN	: List of inventory items based on the category including all sub-categories items
 	@GetMapping("/inventory/{cateId}")
 	public List<Inventory> getItmesByCategory(@PathVariable Integer cateId) {
+		// Get all categories
 		Iterable<Category> categories = categoryServie.findAllCategories();
 		List<Category> categoryList = new ArrayList<Category>();
 		
+		// Find all categories belonged to the category
 		for(Category c : categories) {
 			if(c.getCateId() == cateId) {
 				Integer id= c.getCateId();
@@ -85,7 +83,7 @@ public class Controller {
 			if(c.getParent() == null) continue;
 			
 			Category tmp = c;
-			//Category current = c;
+			// Trace back a categorys parent and check if it's the child of the passed category 
 			while((tmp = tmp.getParent()) != null) {
 				if(tmp.getCateId() == cateId) {
 					Integer id = c.getCateId();
@@ -99,12 +97,45 @@ public class Controller {
 		
 	}
 	
+	// Get all items
+	@GetMapping("/item")
+	public Iterable<Item> getAllItems(){
+		return itemService.findAllItem();
+	}
+	
+	// Get all categories
+	@GetMapping("/category")
+	public Iterable<Category> getAllCategories(){
+		return categoryServie.findAllCategories();
+	}
+	
+	// Delete an inventory information from the database
+	// When an inventory is deleted, the related item will be deleted accordingly
+	// PARAM	: Item id to be deleted
+	// RETURN	: true if it is success
+	/*
 	@DeleteMapping("/item/{itemId}")
 	public ResponseEntity<?> deleteItemById(@PathVariable Integer itemId){
 		Item item = itemService.findById(itemId);
 		Integer inventoryId = inventoryService.findByItem(item).getId();
 		inventoryService.delete(inventoryId);
 		
+		return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+	}*/
+	
+	// Delete an item from the database with the passed item id
+	// This deletes the corresponding inventory entry
+	// PARAM	: Item id to be deleted
+	// RETURN	: true if succeeded
+	@DeleteMapping("/item/{itemId}")
+	public ResponseEntity<?> test(@PathVariable Integer itemId){
+		itemService.delete(itemId);
+		return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/category/{itemId}")
+	public ResponseEntity<?> test2(@PathVariable Integer itemId){
+		categoryServie.delete(itemId);
 		return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 	}
 }

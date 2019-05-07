@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Sidebar from '../components/sidebar';
 import Main from '../components/main';
-import { getAllCategories } from '../controllers/controller';
+
 class Page extends Component {
 
     constructor(props) {
@@ -20,7 +20,11 @@ class Page extends Component {
     componentDidUpdate(){
     }
 
+    // If user clicks one of the parent categories from the list of categories
+    // on top of the inventory table, this function is triggered.
+    // PARAM    : Category id selected
     categorySelectFromMain(cateId){
+        // Call the function that changes current category in Sidebar component.
         this.callSubCategories(cateId);
     }
 

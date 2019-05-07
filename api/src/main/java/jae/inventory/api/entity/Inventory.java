@@ -16,22 +16,23 @@ import javax.persistence.Table;
 @Table(name = "Inventory")
 public class Inventory {
 	
+	//PRIMARY KEY
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id")
 	private Integer id;
 	
-	@OneToOne(cascade = CascadeType.REMOVE)
-	//@PrimaryKeyJoinColumn
-	@JoinColumn(name="item")
+	//FORIEGN KEY REFERENCES Item(itemId) ON DELETE CASCADE
+	@ManyToOne
+	@JoinColumn(name = "item", nullable = false)
 	private Item item;
 	
+	//FORIEGN KEY REFERENCES Category(cateId) ON DELETE CASCADE
 	@ManyToOne
-//	@PrimaryKeyJoinColumn
-	@JoinColumn(name="cateId")
+	@JoinColumn(name = "cateId", nullable = false)
 	private Category cateId;
 	
-	@Column(name="quantity")
+	@Column(name = "quantity", nullable = false)
 	private Integer quantity;
 
 	public Integer getId() {

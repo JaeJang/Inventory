@@ -1,26 +1,27 @@
-CREATE TABLE Item(
-	item_id INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE item(
+	item_id INT(11) NOT NULL AUTO_INCREMENT,
+	item_name VARCHAR(255) NOT NULL,
 	price DECIMAL(10,2) NOT NULL,
-	description VARCHAR(255) DEFAULT '',
+	description VARCHAR(255),
 	PRIMARY KEY(item_id)
 );
 
-CREATE TABLE Category(
-	cate_id INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE category(
+	cate_id INT(11) NOT NULL AUTO_INCREMENT,
 	name VARCHAR(255) NOT NULL,
-	parent_id INT DEFAULT 0,
+	parent INT(11),
 	PRIMARY KEY(cate_id),
-	CONSTRAINT fk_cate FOREIGN KEY(parent_id) REFERENCES Category (cate_id) 
+	FOREIGN KEY(parent) REFERENCES category (cate_id) ON DELETE CASCADE 
 );
 
-CREATE TABLE Inventory(
-	id INT NOT NULL AUTO_INCREMENT,
-	item_id INT NOT NULL,
-	cate_id INT NOT NULL,
-	quantity INT NOT NULL,
+CREATE TABLE inventory(
+	id INT(11) NOT NULL AUTO_INCREMENT,
+	item INT(11) NOT NULL,
+	cate_id INT(11) NOT NULL,
+	quantity INT(11) NOT NULL,
 	PRIMARY KEY(id),
-	CONSTRAINT fk_inven_item FOREIGN KEY(item_id) REFERENCES Item(item_id) ON DELETE CASCADE,
-	CONSTRAINT fk_inven_cate FOREIGN KEY(cate_id) REFERENCES Category(cate_id)
+	FOREIGN KEY(item) REFERENCES item(item_id) ON DELETE CASCADE,
+	FOREIGN KEY(cate_id) REFERENCES category(cate_id)  ON DELETE CASCADE
 );
 
 INSERT INTO Item (price, description, item_name) VALUES(13.22, 'Frist Item inserted', "First");

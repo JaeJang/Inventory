@@ -1,63 +1,64 @@
 import {SIDEBAR_WIDTH, COLLAPSED_SIDEBAT_WIDTH} from '../values/elementSize';
 
+// Collapse the sidebar
 export const collapsing = (comp) => {
-    comp.sidebar_width = SIDEBAR_WIDTH;
-        comp.mainRef_c = comp.props.mainRef.current;
-        comp.sidebarRef_c = comp.sidbarRef.current;
+    let sidebar_width = SIDEBAR_WIDTH;
+    let mainRef_c = comp.props.mainRef.current;
+    let sidebarRef_c = comp.sidbarRef.current;
 
-        if( comp.mainRef_c.offsetLeft !== 0){
+    // If the screen size is big
+    if( mainRef_c.offsetLeft !== 0){
+            
+        comp.timerSidebar = setInterval(()=>{
+            
+            sidebar_width -= 4;
+            sidebarRef_c.style.width = sidebar_width + 'px';
+            mainRef_c.style.marginLeft = sidebar_width + 'px';
+            if(sidebarRef_c.offsetWidth == COLLAPSED_SIDEBAT_WIDTH){
+                clearInterval(comp.timerSidebar);
                 
-            comp.timerSidebar = setInterval(()=>{
-                
-                comp.sidebar_width -= 4;
-                comp.sidebarRef_c.style.width = comp.sidebar_width + 'px';
-                comp.mainRef_c.style.marginLeft = comp.sidebar_width + 'px';
-                if(comp.sidebarRef_c.offsetWidth == COLLAPSED_SIDEBAT_WIDTH){
-                    clearInterval(comp.timerSidebar);
-                    
-                }
-            }, 5);
-            comp.setState({
-                isCollapsed:true,
-            }, () => {
-                //comp.sidebarRef_c.style.width = COLLAPSED_SIDEBAT_WIDTH + 'px';
-            });
-        } else {
-            comp.setState({
-                isCollapsed:true,
-            }, () => {
-                comp.sidebarRef_c.style.width = COLLAPSED_SIDEBAT_WIDTH + 'px';
-            });
-        }
+            }
+        }, 5);
+        comp.setState({
+            isCollapsed:true,
+        });
+    } else {
+        comp.setState({
+            isCollapsed:true,
+        }, () => {
+            sidebarRef_c.style.width = COLLAPSED_SIDEBAT_WIDTH + 'px';
+        });
+    }
         
 }
 
+// Show the sidebar
 export const reverse = (comp) => {
-    comp.sidebar_width = comp.sidbarRef.current.offsetWidth;
-        comp.mainRef_c = comp.props.mainRef.current;
-        comp.sidebarRef_c = comp.sidbarRef.current;
+    let sidebar_width = comp.sidbarRef.current.offsetWidth;
+    let mainRef_c = comp.props.mainRef.current;
+    let sidebarRef_c = comp.sidbarRef.current;
 
-        if( comp.mainRef_c.offsetLeft !== 0){
-                
-            comp.timerSidebar = setInterval(()=>{
-                comp.sidebar_width += 4;
-                comp.sidebarRef_c.style.width = comp.sidebar_width + 'px';
-                //if(comp.mainRef.current.offsetLeft !== 0){
-                    comp.mainRef_c.style.marginLeft = comp.sidebar_width + 'px';
-    
-                //}
-                if(comp.sidebarRef_c.offsetWidth == SIDEBAR_WIDTH){
-                    clearInterval(comp.timerSidebar);
-                    comp.setState({
-                        isCollapsed:false,
-                    });
-                }
-            }, 5);
-        } else {
-            comp.setState({
-                isCollapsed:false,
-            }, () => {
-                comp.sidebarRef_c.style.width = SIDEBAR_WIDTH + 'px';
-            });
-        }
+    if( mainRef_c.offsetLeft !== 0){
+            
+        comp.timerSidebar = setInterval(()=>{
+            sidebar_width += 4;
+            sidebarRef_c.style.width = sidebar_width + 'px';
+            //if(comp.mainRef.current.offsetLeft !== 0){
+                mainRef_c.style.marginLeft = sidebar_width + 'px';
+
+            //}
+            if(sidebarRef_c.offsetWidth == SIDEBAR_WIDTH){
+                clearInterval(comp.timerSidebar);
+                comp.setState({
+                    isCollapsed:false,
+                });
+            }
+        }, 5);
+    } else {
+        comp.setState({
+            isCollapsed:false,
+        }, () => {
+            sidebarRef_c.style.width = SIDEBAR_WIDTH + 'px';
+        });
+    }
 }

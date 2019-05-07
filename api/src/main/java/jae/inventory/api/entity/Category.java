@@ -1,5 +1,8 @@
 package jae.inventory.api.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,27 +11,33 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Category")
 public class Category {
 	
+	//PRIMAY KEY
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="cateId")
+	@Column(name = "cateId")
 	private Integer cateId;
 	
-	//@NotBlank(message ="Name cannot be blank")
-	@Column(name="name")
+	@Column(name = "name", nullable = false)
 	private String name;
 	
-	//@PrimaryKeyJoinColumn
+	//FORIEGN KEY REFERENCES Category(cateId) ON DELETE CASCADE
 	@JoinColumn(name = "parent")
-	@ManyToOne(cascade={CascadeType.ALL})
+	@ManyToOne
 	private Category parent;
 
+	@OneToMany(mappedBy = "cateId", cascade = CascadeType.ALL)
+	Set<Inventory> inventory = new HashSet<Inventory>();
 	
+	@OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+	Set<Category> category = new HashSet<Category>();
+ 
 
 	public Integer getCateId() {
 		return cateId;

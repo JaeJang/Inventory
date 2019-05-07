@@ -1,31 +1,39 @@
 package jae.inventory.api.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "Item")
 public class Item {
 	
+	//PRIMARY KEY
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="itemId")
+	@Column(name = "itemId")
 	private Integer itemId;
 	
-	@Column(name="itemName")
+	@Column(name = "itemName", nullable = false)
 	private String itemName;
 	
 
-	@Column(name="price", columnDefinition="Decimal(10,2)")
+	@Column(name = "price", columnDefinition = "Decimal(10,2)", nullable = false)
 	private Double price;
 	
-	@Column(name="description")
+	@Column(name = "description")
 	private String description;
+	
+	@OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
+	Set<Inventory> inventory = new HashSet<Inventory>();
 	
 	public String getItemName() {
 		return itemName;

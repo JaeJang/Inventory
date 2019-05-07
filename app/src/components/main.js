@@ -18,11 +18,15 @@ class Main extends Component {
     }
     
     componentWillMount(){
+        // Initialize the inventory state with the top categories
         this._updateInventory();
+        // Update the category list state to be shown above the inventory table
         this._updateCategoryList(this.props.currentCate);
     }
 
     componentWillReceiveProps(nextProps){
+        //If the current category has changed to another
+        // then update the inventory and list according to the category
         if(this.props.currentCate != nextProps.currentCate){
             const cateId = _.get(nextProps,'[currentCate].cateId');
             this._updateInventory(cateId);
@@ -30,15 +34,21 @@ class Main extends Component {
         }
     }
 
-
+    // Update the inventory state based on the passed category id
+    // PARAM    : Category id to be used for importing inventory data
     _updateInventory(cateId) {
+        // Get inventory data for a specific category from DB
         getInventory(data => {this.setState({inventory:data})}, cateId);
     }
 
+    // Update the category list that will be shown above the inventory table
+    // PARAM    : Current category 
     _updateCategoryList(currentCate){
         const categoryList = [];
         if(currentCate){
             let parent = currentCate;
+            // Since a category object has information of its parent categories
+            // it's possible to trace back and get all categories where it belongs
             while(parent){
                 categoryList.unshift({name:parent.name, cateId:parent.cateId});    
                 parent = parent.parent;
@@ -48,11 +58,17 @@ class Main extends Component {
         this.setState({categoryList: categoryList});
     }
 
+    // Delete the passed item 
+    // PARAM    : Item to be deleted
+    // PARAM    : Index from the inventory list
     _deleteItem(item, index) {
+        // Ask your if they really want to delete
         let yes = window.confirm("Do you want to delete " + item.itemName + " item?");
         if(yes){
-            deleteItem( res => {
-                if(res){
+            deleteItem( isSuccess => {
+                // If it has been deleted successfully from the database
+                if(isSuccess){
+                    // Remove the item from the list
                     let {inventory} = this.state;
                     inventory.splice(index, 1);
                     this.setState({inventory:inventory});
@@ -107,21 +123,6 @@ class Main extends Component {
                         </tbody>
                         :null
                     }
-                    {/* <tbody>
-                        
-                        <tr>
-                            <td>product1</td>
-                            <td>10</td>
-                            <td>$10.20</td>
-                            <td><i className="icon-trash"></i></td>
-                        </tr>
-                        <tr>
-                            <td>product1</td>
-                            <td>10</td>
-                            <td>$10.20</td>
-                            <td><i className="icon-trash"></i></td>
-                        </tr>
-                    </tbody> */}
                 </table>
             </div>
         );
