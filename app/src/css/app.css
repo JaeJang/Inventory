@@ -302,6 +302,11 @@ body {
 .contents table th, .contents table td {
   padding: 20px;
 }
+@media (max-width: 700px) {
+  .contents table th, .contents table td {
+    padding: 13px 5px 10px 0;
+  }
+}
 .contents table tr {
   text-align: left;
 }
