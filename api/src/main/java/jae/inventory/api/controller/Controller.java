@@ -23,7 +23,7 @@ import jae.inventory.api.service.ItemService;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/")
 @CrossOrigin
 public class Controller {
 

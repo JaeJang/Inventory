@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8080/api";
+const BASE_URL = "http://api.jae-inventory.ga/";
 
 export const endpoint = {
     allcategories : BASE_URL + "/category",
