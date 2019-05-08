@@ -92,7 +92,7 @@ class Sidebar extends Component {
         for(let i = 0; i < categories.length; i++){
             if(categories[i].parent){
                 //if a category is a child of the parent we want to show.
-                if(categories[i].parent.cateId == parentId){
+                if(categories[i].parent.cateId === parentId){
                     subs.push(categories[i]);    
                 }
             

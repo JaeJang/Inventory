@@ -28,7 +28,7 @@ class Main extends Component {
     componentWillReceiveProps(nextProps){
         //If the current category has changed to another
         // then update the inventory and list according to the category
-        if(this.props.currentCate != nextProps.currentCate){
+        if(this.props.currentCate !== nextProps.currentCate){
             const cateId = _.get(nextProps,'[currentCate].cateId');
             this._updateInventory(cateId);
             this._updateCategoryList(nextProps.currentCate);
@@ -89,7 +89,7 @@ class Main extends Component {
                         categoryList.length ? <div className="contents-title-cates">
                         {
                             categoryList.map((value,index) => {
-                                return index != categoryList.length-1 ?
+                                return index !== categoryList.length-1 ?
                                     (<span key={index} className="cate previous" onClick={()=>{this.props.categorySelectFromMain(value.cateId)}}>{value.name} 
                                         <i className={'icon-right-open'}/>
                                     </span>)

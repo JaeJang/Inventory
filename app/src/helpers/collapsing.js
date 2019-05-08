@@ -14,7 +14,7 @@ export const collapsing = (comp) => {
             sidebar_width -= 4;
             sidebarRef_c.style.width = sidebar_width + 'px';
             mainRef_c.style.marginLeft = sidebar_width + 'px';
-            if(sidebarRef_c.offsetWidth == COLLAPSED_SIDEBAT_WIDTH){
+            if(sidebarRef_c.offsetWidth === COLLAPSED_SIDEBAT_WIDTH){
                 clearInterval(comp.timerSidebar);
                 
             }
@@ -47,7 +47,7 @@ export const reverse = (comp) => {
                 mainRef_c.style.marginLeft = sidebar_width + 'px';
 
             //}
-            if(sidebarRef_c.offsetWidth == SIDEBAR_WIDTH){
+            if(sidebarRef_c.offsetWidth === SIDEBAR_WIDTH){
                 clearInterval(comp.timerSidebar);
                 comp.setState({
                     isCollapsed:false,
