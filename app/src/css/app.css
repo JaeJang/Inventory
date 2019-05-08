@@ -168,7 +168,7 @@ body {
     width: 100% !important;
     height: auto;
     position: relative;
-    /* padding-bottom: 20px; */
+    /* padding-bottom: 15px; */
   }
 }
 .sidebar .sidebar-icons {
@@ -249,9 +249,8 @@ body {
     float: none;
   }
   .sidebar .sidebar-contents .sidebar-category .sub-category-arrow {
-    margin-left: 30px;
+    margin-left: 5px;
     float: none;
-    position: fixed;
   }
 }
 .sidebar .sidebar-contents .sidebar-category::after {

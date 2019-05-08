@@ -1,4 +1,4 @@
-const BASE_URL = process.env.MODE && process.env.MODE === "dev" ? "http://localhost:8080/api" : "http://api.jae-inventory.ga/api";
+const BASE_URL = "http://localhost:8080/api";
 
 export const endpoint = {
     allcategories : BASE_URL + "/category",
